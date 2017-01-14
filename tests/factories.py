@@ -21,3 +21,11 @@ class GameFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = 'games.Game'
+
+
+class ParticipantFactory(factory.DjangoModelFactory):
+    game = factory.SubFactory('tests.factories.GameFactory')
+    user = factory.SubFactory('tests.factories.UserFactory')
+
+    class Meta:
+        model = 'games.Participant'
