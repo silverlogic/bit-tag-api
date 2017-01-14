@@ -39,5 +39,22 @@ POST /participants
 |`user` | `integer` | **Required**
 |===
 
+== List
+
+[source]
+----
+GET /participants
+----
+
+=== Parameters
+
+[cols="2,1,5"]
+|===
+|Name |Type |Description
+
+|`user` | `integer` | limit to participants with the given user id.
+|`status` | `string` | limit to participants with the given status.
+|===
+
 
 // vim: set ft=asciidoc:

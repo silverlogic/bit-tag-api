@@ -1,4 +1,4 @@
-from rest_framework import mixins, viewsets
+from rest_framework import mixins, viewsets, filters
 
 from apps.games.models import Game, Participant
 
@@ -17,3 +17,5 @@ class ParticipantsViewSet(mixins.CreateModelMixin,
                           viewsets.GenericViewSet):
     queryset = Participant.objects.all()
     serializer_class = ParticipantSerializer
+    filter_backends = (filters.DjangoFilterBackend)
+    filter_fields = ('user', 'status',)
