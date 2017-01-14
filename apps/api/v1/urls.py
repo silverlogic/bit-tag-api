@@ -11,6 +11,11 @@ from .social_auth.views import SocialAuthViewSet  # noqa
 
 router.register(r'social-auth', SocialAuthViewSet, base_name='social-auth')
 
+# Users
+from .users.views import UsersViewSet  # noqa
+
+router.register(r'users', UsersViewSet, base_name='users')
+
 # Games
 from .games.views import GamesViewSet, ParticipantsViewSet  # noqa
 
