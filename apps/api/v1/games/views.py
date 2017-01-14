@@ -38,6 +38,6 @@ class ParticipantsViewSet(mixins.CreateModelMixin,
     @detail_route(methods=['POST'])
     def tag(self, request, pk=None, *args, **kwargs):
         participant = self.get_object()
-        participant.tag(tagged_by=Participant.objects.get(game=participant.game, user=request.user))
+        participant.tag(tagged_by=request.user)
         participant.save()
         return response.Response({})

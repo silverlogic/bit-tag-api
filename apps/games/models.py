@@ -34,7 +34,7 @@ class Participant(models.Model):
     game = models.ForeignKey('Game', related_name='participants', on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     status = FSMField(choices=Status, default=Status.invited)
-    tagged_by = models.ForeignKey('self', blank=True, null=True, related_name='tagged', on_delete=models.CASCADE)
+    tagged_by = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True, related_name='tagged', on_delete=models.CASCADE)
 
     @transition(status, source=Status.invited, target=Status.joined)
     def join(self):
