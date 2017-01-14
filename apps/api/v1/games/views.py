@@ -18,4 +18,4 @@ class ParticipantsViewSet(mixins.CreateModelMixin,
     queryset = Participant.objects.all()
     serializer_class = ParticipantSerializer
     filter_backends = (filters.DjangoFilterBackend)
-    filter_fields = ('user', 'status',)
+    filter_fields = ('game', 'user', 'status',)
