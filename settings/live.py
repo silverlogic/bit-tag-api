@@ -4,7 +4,7 @@ DEBUG = False
 SECRET_KEY = env('SECRET_KEY')
 
 # Email
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+DEFAULT_FROM_EMAIL = 'john@test.com'
 DJMAIL_REAL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Static / Media Files
