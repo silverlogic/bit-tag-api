@@ -13,7 +13,7 @@ title: Participants
 |`id` | `integer` |
 |`game` | `integer` |
 |`user` | `integer` |
-|`status`  | `string` | Possible values: `invited`, `accepted`.
+|`status`  | `string` | Possible values: `invited`, `joined`, `tagged`.
 |===
 
 === Example
@@ -64,6 +64,15 @@ The participant decides to pay the game's buy in and join it.
 [source]
 ----
 POST /participants/:id/join
+----
+
+== Tag
+
+Tag a participant
+
+[source]
+----
+POST /participants/:id/tag
 ----
 
 

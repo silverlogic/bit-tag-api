@@ -1,4 +1,4 @@
-from rest_framework import mixins, viewsets, filters, response
+from rest_framework import filters, mixins, response, viewsets
 from rest_framework.decorators import detail_route
 
 from apps.games.models import Game, Participant
@@ -32,5 +32,12 @@ class ParticipantsViewSet(mixins.CreateModelMixin,
     def join(self, request, pk=None, *args, **kwargs):
         participant = self.get_object()
         participant.join()
+        participant.save()
+        return response.Response({})
+
+    @detail_route(methods=['POST'])
+    def tag(self, request, pk=None, *args, **kwargs):
+        participant = self.get_object()
+        participant.tag(tagged_by=Participant.objects.get(game=participant.game, user=request.user))
         participant.save()
         return response.Response({})

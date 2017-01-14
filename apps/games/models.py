@@ -28,12 +28,18 @@ class Participant(models.Model):
     Status = Choices(
         ('invited', _('Invited')),
         ('joined', _('Joined')),
+        ('tagged', _('Tagged')),
     )
 
     game = models.ForeignKey('Game', related_name='participants', on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     status = FSMField(choices=Status, default=Status.invited)
+    tagged_by = models.ForeignKey('self', blank=True, null=True, related_name='tagged', on_delete=models.CASCADE)
 
     @transition(status, source=Status.invited, target=Status.joined)
     def join(self):
         pass
+
+    @transition(status, source=Status.joined, target=Status.tagged)
+    def tag(self, tagged_by):
+        self.tagged_by = tagged_by

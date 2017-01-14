@@ -33,3 +33,16 @@ class TestParticipantsJoin(ApiMixin):
         h.responseOk(r)
         participant.refresh_from_db()
         assert participant.status == Participant.Status.joined
+
+
+class TestParticipantsTag(ApiMixin):
+    view_name = 'participants-tag'
+
+    def test_user_can_tag(self, user_client):
+        game = f.GameFactory()
+        f.ParticipantFactory(game=game, user=user_client.user)
+        participant = f.ParticipantFactory(game=game, status=Participant.Status.joined)
+        r = user_client.post(self.reverse(kwargs={'pk': participant.pk}))
+        h.responseOk(r)
+        participant.refresh_from_db()
+        assert participant.status == Participant.Status.tagged
