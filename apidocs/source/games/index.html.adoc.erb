@@ -1,0 +1,60 @@
+---
+title: Games
+---
+
+= Games
+
+== Object
+
+[cols="2,1,5"]
+|===
+|Name |Type |Description
+
+|`id` | `integer` |
+|`owner` | `integer` |
+|`center_point`  | `object` | lat/long. See example.
+|`radius` | `float` | How far the boundary is from the center point in miles.
+|`buy_in` | `float(string)` | How much it costs in BTC to join the game.
+|`status` | `string` | Possible values: `pending`, `started`.
+|===
+
+=== Example
+
+++++
+<%= json :game %>
+++++
+
+== Create
+
+[source]
+----
+POST /games
+----
+
+=== Input
+
+[cols="2,1,5"]
+|===
+|Name |Type |Description
+
+|`center_point`  | `object` | **Required** lat/long.  See the object example.
+|`radius` | `float` | **Required** How far the boundary is from the center point in miles.
+|`buy_in` | `float(string)` | **Required** How much it costs in BTC to join the game.
+|===
+
+== Retrieve
+
+[source]
+----
+GET /games/:id
+----
+
+== List
+
+[source]
+----
+GET /games
+----
+
+
+// vim: set ft=asciidoc:

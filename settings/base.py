@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
 
     # Third party
     'rest_framework',
@@ -50,9 +51,11 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
     'rest_social_auth',
     'fsm_admin',
+    'rest_framework_gis',
 
     # Project
     'apps.base',
+    'apps.games',
     'apps.users',
 ]
 

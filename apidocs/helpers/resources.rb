@@ -54,6 +54,18 @@ module Resources
     token: "lkja8*lkajsd*lkjas;ldkj8asd;kJASd811"
   }
 
+  GAME ||= {
+      id: 1,
+      owner: 1,
+      center_point: {
+          'type': 'Point',
+          'coordinates': [22.8515625, 17.764892578125]
+      },
+      radius: 3.5,
+      buy_in: '0.00000010',
+      status: 'pending'
+  }
+
   USER ||= {
     id: 1,
     email: 'john@gmail.com',
