@@ -1,0 +1,52 @@
+---
+title: Users
+---
+
+= Users
+
+== Object
+
+Properties marked `Private` are only visible when the user is your own.
+
+[cols="2,1,5"]
+|===
+|Name |Type |Description
+
+|`id` | `int` | unique identifier
+|`email` | `string` | **Private**
+|`avatar` | `image` | Sizes: `full_size(1024x1024)`, `small(64x64)`
+|`first_name` | `string` |
+|`last_name` | `string` |
+|===
+
+++++
+<%= json :user %>
+++++
+
+== Social Auth (Register / Login)
+
+[source]
+----
+POST /social-auth
+----
+
+=== Input
+
+[cols="2,1,5"]
+|===
+|Name |Type |Description
+
+|`access_token` | `string` | Facebook access token retrieved from the facebook SDK.
+|===
+
+== Me
+
+Get the currently logged in user.
+
+[source]
+----
+GET /users/me
+----
+
+
+// vim: set ft=asciidoc:
