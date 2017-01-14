@@ -1,4 +1,3 @@
-import re
 from io import BytesIO
 
 from django.core.files.images import ImageFile

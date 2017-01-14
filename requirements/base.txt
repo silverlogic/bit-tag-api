@@ -27,3 +27,6 @@ gunicorn==19.6.0
 
 # datetime helpers
 python-dateutil==2.6.0
+
+# bitcoin
+coinbase==2.0.6

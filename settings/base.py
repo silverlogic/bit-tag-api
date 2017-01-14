@@ -2,7 +2,6 @@
 https://docs.djangoproject.com/en/1.9/ref/settings/
 '''
 import pathlib
-from datetime import timedelta
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -52,11 +51,9 @@ INSTALLED_APPS = [
     'rest_social_auth',
     'fsm_admin',
 
-    # Base
+    # Project
     'apps.base',
     'apps.users',
-
-    # Project
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -209,3 +206,7 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
 }
 if SOCIAL_AUTH_FACEBOOK_KEY and SOCIAL_AUTH_FACEBOOK_SECRET:
     AUTHENTICATION_BACKENDS.append('social.backends.facebook.FacebookOAuth2')
+
+# Coinbase
+COINBASE_API_KEY = env('COINBASE_API_KEY')
+COINBASE_API_SECRET = env('COINBASE_API_SECRET')
