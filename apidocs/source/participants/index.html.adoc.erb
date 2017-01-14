@@ -1,0 +1,43 @@
+---
+title: Participants
+---
+
+= Games
+
+== Object
+
+[cols="2,1,5"]
+|===
+|Name |Type |Description
+
+|`id` | `integer` |
+|`game` | `integer` |
+|`user` | `integer` |
+|`status`  | `string` | Possible values: `invited`, `accepted`.
+|===
+
+=== Example
+
+++++
+<%= json :participant %>
+++++
+
+== Create
+
+[source]
+----
+POST /participants
+----
+
+=== Input
+
+[cols="2,1,5"]
+|===
+|Name |Type |Description
+
+|`game` | `integer` | **Required**
+|`user` | `integer` | **Required**
+|===
+
+
+// vim: set ft=asciidoc:

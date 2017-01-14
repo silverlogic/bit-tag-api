@@ -66,6 +66,13 @@ module Resources
       status: 'pending'
   }
 
+  PARTICIPANT ||= {
+      id: 1,
+      game: 1,
+      user: 1,
+      status: 'pending',
+  }
+
   USER ||= {
     id: 1,
     email: 'john@gmail.com',

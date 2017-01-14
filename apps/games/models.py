@@ -33,3 +33,7 @@ class Participant(models.Model):
     game = models.ForeignKey('Game', related_name='participants', on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     status = FSMField(choices=Status, default=Status.invited)
+
+    @transition(status, source=Status.invited, target=Status.joined)
+    def join(self):
+        pass
