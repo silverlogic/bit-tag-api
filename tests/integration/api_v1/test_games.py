@@ -1,5 +1,8 @@
 import pytest
 
+from apps.games.models import Game
+
+import tests.factories as f
 import tests.helpers as h
 from tests.mixins import ApiMixin
 
@@ -27,3 +30,14 @@ class TestGamesCreate(ApiMixin):
     def test_user_can_create(self, user_client, data):
         r = user_client.post(self.reverse(), data)
         h.responseCreated(r)
+
+
+class TestGamesStart(ApiMixin):
+    view_name = 'games-start'
+
+    def test_user_can_start_game(self, user_client):
+        game = f.GameFactory()
+        r = user_client.post(self.reverse(kwargs={'pk': game.pk}))
+        h.responseOk(r)
+        game.refresh_from_db()
+        assert game.status == Game.Status.started

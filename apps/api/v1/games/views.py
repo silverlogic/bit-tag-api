@@ -12,6 +12,13 @@ class GamesViewSet(mixins.CreateModelMixin,
     queryset = Game.objects.all()
     serializer_class = GameSerializer
 
+    @detail_route(methods=['POST'])
+    def start(self, request, pk=None, *args, **kwargs):
+        game = self.get_object()
+        game.start()
+        game.save()
+        return response.Response({})
+
 
 class ParticipantsViewSet(mixins.CreateModelMixin,
                           mixins.ListModelMixin,
