@@ -57,6 +57,6 @@ def set_is_new(is_new, user, *args, **kwargs):
 
 def create_coinbase_wallet(is_new, user, *args, **kwargs):
     if is_new:
-        coinbase_wallet = coinbase_client.create_account({'name': f'{user.get_full_name()} ({user.pk})'})
+        coinbase_wallet = coinbase_client.create_account(name=f'{user.get_full_name()} ({user.pk})')
         user.coinbase_account_id = coinbase_wallet.id
         user.save()
