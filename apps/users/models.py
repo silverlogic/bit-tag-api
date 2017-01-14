@@ -61,6 +61,7 @@ class User(PermissionsMixin, AbstractBaseUser):
     # Profile
     first_name = models.CharField(max_length=100, blank=True)
     last_name = models.CharField(max_length=100, blank=True)
+    coinbase_account_id = models.CharField(max_length=100, blank=True)
 
     objects = UserManager()
 

@@ -197,6 +197,7 @@ SOCIAL_AUTH_PIPELINE = [
 
     'apps.users.pipeline.set_avatar',
     'apps.users.pipeline.set_is_new',
+    'apps.users.pipeline.create_coinbase_wallet',
 ]
 SOCIAL_AUTH_USER_FIELDS = ['username', 'first_name', 'last_name']
 

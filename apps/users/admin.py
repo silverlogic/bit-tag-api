@@ -16,7 +16,7 @@ class UserAdmin(UserAdmin):
             'fields': ('is_active', 'is_superuser')
         }),
         (_('Profile'), {
-            'fields': (('first_name', 'last_name'),)
+            'fields': (('first_name', 'last_name'), 'coinbase_account_id',)
         }),
     )
     add_fieldsets = (

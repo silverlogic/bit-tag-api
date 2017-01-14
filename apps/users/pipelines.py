@@ -5,6 +5,8 @@ from django.core.files.images import ImageFile
 import requests
 from avatar.models import Avatar
 
+from apps.base.coinbase import coinbase_client
+
 
 class EmailAlreadyExistsError(Exception):
     pass
@@ -51,3 +53,10 @@ def set_avatar(is_new, backend, user, response, *args, **kwargs):
 
 def set_is_new(is_new, user, *args, **kwargs):
     user.is_new = is_new
+
+
+def create_coinbase_wallet(is_new, user, *args, **kwargs):
+    if is_new:
+        coinbase_wallet = coinbase_client.account({'name': f'{user.get_full_name()} ({user.pk})'})
+        user.coinbase_account_id = coinbase_wallet.id
+        user.save()
