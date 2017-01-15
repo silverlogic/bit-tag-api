@@ -14,7 +14,7 @@ class Game(models.Model):
     )
 
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
-    center_point = PointField()
+    center_point = PointField(srid=4326)
     radius = models.FloatField()
     buy_in = models.DecimalField(max_digits=12, decimal_places=8)
     status = FSMField(choices=Status, default=Status.pending)

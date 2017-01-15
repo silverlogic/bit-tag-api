@@ -13,4 +13,4 @@ class PointOfInterest(models.Model):
 
     name = models.CharField(max_length=100, blank=True)
     type = models.CharField(max_length=20, choices=Type)
-    point = PointField()
+    point = PointField(srid=4326)
