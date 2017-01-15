@@ -39,6 +39,7 @@ class NotificationsViewSet(mixins.CreateModelMixin,
                            viewsets.GenericViewSet):
     def create(self, request, *args, **kwargs):
         data = request.data
+        print(data)
         if data['type'] == 'wallet:addresses:new-payment':
             try:
                 address = Address.objects.get(coinbase_id=data['data']['id'])
