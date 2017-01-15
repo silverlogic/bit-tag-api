@@ -3,7 +3,10 @@ from push_notifications.models import APNSDevice
 from apps.games.models import Game, Participant
 from apps.users.models import User
 
+from expander import ExpanderSerializerMixin
+
 from ...serializers import ModelSerializer
+from ..users.serializers import UserSerializer
 
 
 class GameSerializer(ModelSerializer):
@@ -23,11 +26,14 @@ class GameSerializer(ModelSerializer):
         return game
 
 
-class ParticipantSerializer(ModelSerializer):
+class ParticipantSerializer(ExpanderSerializerMixin, ModelSerializer):
     class Meta:
         model = Participant
         fields = ('id', 'game', 'user', 'status',)
         read_only_fields = ('status',)
+        expandable_fields = {
+            'user': UserSerializer
+        }
 
     def create(self, validated_data):
         participant = super().create(validated_data)
