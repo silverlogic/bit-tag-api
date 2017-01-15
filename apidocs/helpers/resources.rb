@@ -70,7 +70,7 @@ module Resources
       id: 1,
       game: 1,
       user: 1,
-      status: 'pending',
+      status: 'invited',
   }
 
   POINTS_OF_INTEREST ||= {

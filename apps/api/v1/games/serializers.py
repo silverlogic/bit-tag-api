@@ -13,7 +13,13 @@ class GameSerializer(ModelSerializer):
 
     def create(self, validated_data):
         validated_data['owner'] = self.context['request'].user
-        return super().create(validated_data)
+        game = super().create(validated_data)
+        Participant.objects.create(
+            game=game,
+            user=validated_data['owner'],
+            status=Participant.Status.joined
+        )
+        return game
 
 
 class ParticipantSerializer(ModelSerializer):
@@ -24,5 +30,5 @@ class ParticipantSerializer(ModelSerializer):
 
     def create(self, validated_data):
         participant = super().create(validated_data)
-        APNSDevice.objects.get(user=validated_data['user']).send_message('game_invited')
+        APNSDevice.objects.filter(user=validated_data['user']).send_message('game_invited')
         return participant

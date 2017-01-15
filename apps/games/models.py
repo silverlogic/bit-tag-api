@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.contrib.gis.db.models import PointField
 from django.db import models
-from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
 from django_fsm import FSMField, transition
@@ -15,6 +14,7 @@ class Game(models.Model):
     Status = Choices(
         ('pending', _('Pending')),
         ('started', _('Started')),
+        ('ended', _('Ended')),
     )
 
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='games')
@@ -25,7 +25,13 @@ class Game(models.Model):
 
     @transition(status, source=Status.pending, target=Status.started)
     def start(self):
-        pass
+        users = User.objects.filter(participant__game=self)
+        APNSDevice.objects.filter(user__in=users).send_message('game_started')
+
+    @transition(status, source=Status.started, target=Status.ended)
+    def end(self):
+        users = User.objects.filter(participant__game=self)
+        APNSDevice.objects.filter(user__in=users).send_message('game_ended')
 
 
 class Participant(models.Model):
@@ -42,11 +48,14 @@ class Participant(models.Model):
 
     @transition(status, source=Status.invited, target=Status.joined)
     def join(self):
-        users = User.objects.filter(Q(games=self.game) | Q(participants__game=self.game))
+        users = User.objects.filter(participant__game=self.game)
         APNSDevice.objects.filter(user__in=users).send_message('participant_joined')
 
     @transition(status, source=Status.joined, target=Status.tagged)
     def tag(self, tagged_by):
         self.tagged_by = tagged_by
-        users = User.objects.filter(Q(games=self.game) | Q(participants__game=self.game))
+        users = User.objects.filter(participant__game=self.game)
         APNSDevice.objects.filter(user__in=users).send_message('participant_tagged')
+        if Participant.objects.exclude(status=self.Status.tagged).count() == 1:
+            self.game.end()
+            self.game.save()
