@@ -2,7 +2,7 @@ from io import BytesIO
 
 import qrcode
 from push_notifications.models import APNSDevice
-from rest_framework import mixins, viewsets
+from rest_framework import mixins, viewsets, renderers
 from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 
@@ -11,12 +11,22 @@ from apps.wallets.models import Address, Transaction
 from .serializers import AddressSerializer
 
 
+class PngRenderer(renderers.BaseRenderer):
+    media_type = 'image/png'
+    format = 'png'
+    charset = None
+    render_style = 'binary'
+
+    def render(self, data, media_type=None, renderer_context=None):
+        return data
+
+
 class AddressesViewSet(mixins.CreateModelMixin,
                        viewsets.GenericViewSet):
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
 
-    @detail_route(methods=['GET'])
+    @detail_route(methods=['GET'], renderer_classes=[PngRenderer])
     def qrcode(self, request, pk=None, *args, **kwargs):
         address = self.get_object()
         img = qrcode.make(address.address)
