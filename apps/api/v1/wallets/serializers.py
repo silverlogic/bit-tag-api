@@ -8,7 +8,7 @@ class AddressSerializer(ModelSerializer):
     class Meta:
         model = Address
         fields = ('id', 'user', 'address',)
-        readonly_fields = ('user', 'address',)
+        read_only_fields = ('user', 'address',)
 
     def create(self, validated_data):
         user = self.context['request'].user
