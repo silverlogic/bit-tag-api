@@ -26,12 +26,12 @@ class Game(models.Model):
     @transition(status, source=Status.pending, target=Status.started)
     def start(self):
         users = User.objects.filter(participant__game=self)
-        APNSDevice.objects.filter(user__in=users).send_message('game_started')
+        APNSDevice.objects.filter(user__in=users).send_message({'type': 'game_started'})
 
     @transition(status, source=Status.started, target=Status.ended)
     def end(self):
         users = User.objects.filter(participant__game=self)
-        APNSDevice.objects.filter(user__in=users).send_message('game_ended')
+        APNSDevice.objects.filter(user__in=users).send_message({'type': 'game_ended'})
 
 
 class Participant(models.Model):
@@ -49,13 +49,13 @@ class Participant(models.Model):
     @transition(status, source=Status.invited, target=Status.joined)
     def join(self):
         users = User.objects.filter(participant__game=self.game)
-        APNSDevice.objects.filter(user__in=users).send_message('participant_joined')
+        APNSDevice.objects.filter(user__in=users).send_message({'type': 'participant_joined'})
 
     @transition(status, source=Status.joined, target=Status.tagged)
     def tag(self, tagged_by):
         self.tagged_by = tagged_by
         users = User.objects.filter(participant__game=self.game)
-        APNSDevice.objects.filter(user__in=users).send_message('participant_tagged')
+        APNSDevice.objects.filter(user__in=users).send_message({'type': 'participant_tagged'})
         if Participant.objects.exclude(status=self.Status.tagged).count() == 1:
             self.game.end()
             self.game.save()
