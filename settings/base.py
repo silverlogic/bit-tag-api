@@ -26,6 +26,9 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
 ]
 
+# Sites
+URL = env('URL')
+
 # Mail
 EMAIL_BACKEND = 'djmail.backends.default.EmailBackend'
 DJMAIL_MAX_RETRY_NUMBER = 3

@@ -9,9 +9,9 @@ DJMAIL_REAL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Must be absolute URLs for use in emails.
 MEDIA_ROOT = str(BASE_DIR.parent / 'media')
-MEDIA_URL = '/media/'
+MEDIA_URL = '{url}/media/'.format(URL)
 STATIC_ROOT = str(BASE_DIR.parent / 'static')
-STATIC_URL = '/static/'
+STATIC_URL = '{url}/static/'.format(URL)
 
 # Debug Toolbar
 INSTALLED_APPS += ['debug_toolbar']
