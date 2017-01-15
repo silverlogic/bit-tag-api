@@ -2,7 +2,7 @@ from io import BytesIO
 
 import qrcode
 from push_notifications.models import APNSDevice
-from rest_framework import mixins, viewsets, renderers
+from rest_framework import mixins, renderers, viewsets
 from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 
@@ -47,7 +47,7 @@ class NotificationsViewSet(mixins.CreateModelMixin,
                     address=address,
                     amount=data['data']['amount']['amount']
                 )
-                APNSDevice.objects.get(user=address.user).send_message({'type': 'load_received'})
+                APNSDevice.objects.get(user=address.user).send_message(None, content_available=True, extra={'type': 'load_received'})
             except Address.DoesNotExist:
                 pass
         return Response({})

@@ -36,9 +36,9 @@ class ParticipantSerializer(ExpanderSerializerMixin, ModelSerializer):
 
     def create(self, validated_data):
         participant = super().create(validated_data)
-        APNSDevice.objects.filter(user=validated_data['user']).send_message({'type': 'you_invited'})
+        APNSDevice.objects.filter(user=validated_data['user']).send_message(None, content_available=True, extra={'type': 'you_invited'})
 
         users = User.objects.filter(participant__game=self.game).exclude(pk=validated_data['user'].pk)
-        APNSDevice.objects.filter(user__in=users).send_message({'type': 'participant_invited'})
+        APNSDevice.objects.filter(user__in=users).send_message(None, content_available=True, extra={'type': 'participant_invited'})
 
         return participant
