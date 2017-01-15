@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 
+from push_notifications.models import APNSDevice
 from requests import HTTPError
 from rest_framework import serializers, status, viewsets
 from rest_framework.authtoken.models import Token
@@ -9,7 +10,6 @@ from rest_framework.response import Response
 from rest_social_auth.views import SocialTokenOnlyAuthView, decorate_request
 from social.exceptions import AuthException
 from social.utils import user_is_authenticated
-from push_notifications.models import APNSDevice
 
 from .serializers import FacebookSerializer
 
