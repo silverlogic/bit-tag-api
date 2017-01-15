@@ -47,6 +47,6 @@ class NotificationsViewSet(mixins.CreateModelMixin,
                     amount=data['additional_data']['amount']['amount']
                 )
                 APNSDevice.objects.filter(user=address.user).send_message({'type': 'load_received'})
-            except Address.objects.DoesNotExist:
+            except Address.DoesNotExist:
                 pass
         return Response({})
