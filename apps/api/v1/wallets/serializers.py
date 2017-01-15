@@ -1,3 +1,5 @@
+from rest_framework import serializers
+
 from apps.base.coinbase import coinbase_client
 from apps.wallets.models import Address
 
@@ -17,3 +19,8 @@ class AddressSerializer(ModelSerializer):
         validated_data['coinbase_id'] = coinbase_address.id
         validated_data['address'] = coinbase_address.address
         return super().create(validated_data)
+
+
+class SendMoneySerializer(serializers.Serializer):
+    address = serializers.CharField()
+    amount = serializers.DecimalField(max_digits=12, decimal_places=8)

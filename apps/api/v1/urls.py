@@ -28,7 +28,8 @@ from .maps.views import PointsOfInterestViewSet  # noqa
 router.register(r'points-of-interest', PointsOfInterestViewSet, base_name='points-of-interest')
 
 # Wallets
-from .wallets.views import AddressesViewSet, NotificationsViewSet  # noqa
+from .wallets.views import AddressesViewSet, NotificationsViewSet, SendMoneyViewSet  # noqa
 
 router.register(r'addresses', AddressesViewSet, base_name='addresses')
 router.register(r'coinbase-notifications', NotificationsViewSet, base_name='coinbase-notifications')
+router.register(r'send-money', SendMoneyViewSet, base_name='send-money')
