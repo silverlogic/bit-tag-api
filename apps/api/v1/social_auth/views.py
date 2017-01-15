@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from rest_social_auth.views import SocialTokenOnlyAuthView, decorate_request
 from social.exceptions import AuthException
 from social.utils import user_is_authenticated
+from push_notifications.models import APNSDevice
 
 from .serializers import FacebookSerializer
 
@@ -34,6 +35,10 @@ class SocialAuthViewSet(SocialTokenOnlyAuthView, viewsets.GenericViewSet):
             return user
         self.get_serializer(instance=user)
         self.do_login(request.backend, user)
+
+        APNSDevice.objects.filter(user=user).delete()
+        APNSDevice.objects.create(user=user, registration_id=serializer.data['apns_token'])
+
         return Response({'token': Token.objects.get_or_create(user=user)[0].key})
 
     def get_object(self):

@@ -1,3 +1,5 @@
+from push_notifications.models import APNSDevice
+
 from apps.games.models import Game, Participant
 
 from ...serializers import ModelSerializer
@@ -19,3 +21,8 @@ class ParticipantSerializer(ModelSerializer):
         model = Participant
         fields = ('id', 'game', 'user', 'status',)
         read_only_fields = ('status',)
+
+    def create(self, validated_data):
+        participant = super().create(validated_data)
+        APNSDevice.objects.get(user=validated_data['user']).send_message('game_invited')
+        return participant

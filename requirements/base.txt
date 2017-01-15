@@ -9,6 +9,7 @@ easy-thumbnails==2.3
 django-fsm==2.4.0
 django-fsm-admin==1.2.4
 python-social-auth==0.2.21
+django-push-notifications==1.4.1
 
 # sending emails
 djmail==0.13.0

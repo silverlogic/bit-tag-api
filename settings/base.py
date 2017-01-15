@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'rest_social_auth',
     'fsm_admin',
     'rest_framework_gis',
+    'push_notifications',
 
     # Project
     'apps.base',
@@ -215,3 +216,8 @@ if SOCIAL_AUTH_FACEBOOK_KEY and SOCIAL_AUTH_FACEBOOK_SECRET:
 # Coinbase
 COINBASE_API_KEY = env('COINBASE_API_KEY')
 COINBASE_API_SECRET = env('COINBASE_API_SECRET')
+
+# Push Notifications
+PUSH_NOTIFICATIONS_SETTINGS = {
+    'APNS_CERTIFICATE': env('APNS_CERTIFICATE_PATH'),
+}
