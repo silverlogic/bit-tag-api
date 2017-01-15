@@ -63,7 +63,7 @@ class SendMoneyViewSet(mixins.CreateModelMixin,
         serializer.is_valid(raise_exception=True)
         coinbase_client.send_money(
             request.user.coinbase_account_id,
-            {
+            **{
                 'to': serializer.data['address'],
                 'amount': str(serializer.data['amount']),
                 'currency': 'BTC'
