@@ -1,5 +1,6 @@
 from expander import ExpanderSerializerMixin
 from push_notifications.models import APNSDevice
+from rest_framework import serializers
 
 from apps.games.models import Game, Participant
 from apps.users.models import User
@@ -26,9 +27,11 @@ class GameSerializer(ModelSerializer):
 
 
 class ParticipantSerializer(ExpanderSerializerMixin, ModelSerializer):
+    btc_earned = serializers.DecimalField(max_digits=12, decimal_places=8, read_only=True)
+
     class Meta:
         model = Participant
-        fields = ('id', 'game', 'user', 'status',)
+        fields = ('id', 'game', 'user', 'status', 'btc_earned',)
         read_only_fields = ('status',)
         expandable_fields = {
             'user': UserSerializer

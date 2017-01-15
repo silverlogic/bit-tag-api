@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.conf import settings
 from django.contrib.gis.db.models import PointField
 from django.db import models
@@ -45,6 +47,23 @@ class Participant(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     status = FSMField(choices=Status, default=Status.invited)
     tagged_by = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True, related_name='tagged', on_delete=models.CASCADE)
+
+    @property
+    def btc_earned(self):
+        participant_count = self.game.participants.count()
+
+        pool = self.game.buy_in * participant_count
+        winner_pool = Decimal(20) * pool / Decimal(100)
+        remaining_pool = pool - winner_pool
+        tag_amount = remaining_pool / (participant_count - 1)
+
+        earned = Decimal(0)
+        earned = tag_amount * Participant.objects.filter(game=self.game, tagged_by=self.user).count()
+
+        if self.game.status == Game.Status.ended and self.status != Participant.Status.tagged:
+            earned += winner_pool
+
+        return earned
 
     @transition(status, source=Status.invited, target=Status.joined)
     def join(self):
