@@ -1,0 +1,42 @@
+---
+title: Points of Interest
+---
+
+= Points of Interest
+
+== Object
+
+[cols="2,1,5"]
+|===
+|Name |Type |Description
+
+|`id` | `integer` |
+|`name` | `string` | Only for merchants.
+|`type` | `integer` | Possible valus: `atm`, `merchant`.
+|`point`  | `object` | lat/long
+|===
+
+=== Example
+
+++++
+<%= json :point_of_interest %>
+++++
+
+== List
+
+[source]
+----
+GET /points-of-interest
+----
+
+=== Parameters
+
+[cols="2,1,5"]
+|===
+|Name |Type |Description
+
+|`point` | `string` | Order the results based on how far they are from the `point`.
+|===
+
+
+// vim: set ft=asciidoc:

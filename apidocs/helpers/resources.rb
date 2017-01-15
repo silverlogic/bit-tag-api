@@ -73,6 +73,16 @@ module Resources
       status: 'pending',
   }
 
+  POINTS_OF_INTEREST ||= {
+      id: 1,
+      name: '',
+      type: 'atm',
+      point: {
+          'type': 'Point',
+          'coordinates': [22.8515625, 17.764892578125]
+      },
+  }
+
   USER ||= {
     id: 1,
     email: 'john@gmail.com',

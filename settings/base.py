@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     # Project
     'apps.base',
     'apps.games',
+    'apps.maps',
     'apps.users',
 ]
 

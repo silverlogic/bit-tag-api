@@ -21,3 +21,8 @@ from .games.views import GamesViewSet, ParticipantsViewSet  # noqa
 
 router.register(r'games', GamesViewSet, base_name='games')
 router.register(r'participants', ParticipantsViewSet, base_name='participants')
+
+# Maps
+from .maps.views import PointsOfInterestViewSet  # noqa
+
+router.register(r'points-of-interest', PointsOfInterestViewSet, base_name='points-of-interest')
