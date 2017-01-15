@@ -1,0 +1,33 @@
+---
+title: Addresses
+---
+
+= Addresses
+
+== Object
+
+[cols="2,1,5"]
+|===
+|Name |Type |Description
+
+|`id` | `integer` |
+|`user` | `integer` |
+|`address` | `string` |
+|===
+
+=== Create
+
+[source]
+----
+POST /addresses
+----
+
+== QR Code Image
+
+[source]
+----
+GET /addresses/:id/qrcode
+----
+
+
+// vim: set ft=asciidoc:

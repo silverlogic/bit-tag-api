@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'apps.base',
     'apps.games',
     'apps.maps',
+    'apps.wallets',
     'apps.users',
 ]
 

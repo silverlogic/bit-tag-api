@@ -32,3 +32,6 @@ python-dateutil==2.6.0
 
 # bitcoin
 coinbase==2.0.6
+
+# qrcode creator
+qrcode==5.3

@@ -1,9 +1,8 @@
+from expander import ExpanderSerializerMixin
 from push_notifications.models import APNSDevice
 
 from apps.games.models import Game, Participant
 from apps.users.models import User
-
-from expander import ExpanderSerializerMixin
 
 from ...serializers import ModelSerializer
 from ..users.serializers import UserSerializer

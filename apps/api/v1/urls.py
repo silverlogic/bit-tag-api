@@ -26,3 +26,8 @@ router.register(r'participants', ParticipantsViewSet, base_name='participants')
 from .maps.views import PointsOfInterestViewSet  # noqa
 
 router.register(r'points-of-interest', PointsOfInterestViewSet, base_name='points-of-interest')
+
+# Wallets
+from .wallets.views import AddressesViewSet  # noqa
+
+router.register(r'addresses', AddressesViewSet, base_name='addresses')
