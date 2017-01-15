@@ -14,4 +14,3 @@ class Address(models.Model):
 class Transaction(models.Model):
     address = models.ForeignKey('Address', related_name='transactions', on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=12, decimal_places=8)
-    status = models.CharField(max_length=50)

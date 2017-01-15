@@ -8,7 +8,7 @@ class AddressAdmin(admin.ModelAdmin):
 
 
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'address', 'amount', 'status',)
+    list_display = ('id', 'address', 'amount',)
 
 
 admin.site.register(Address, AddressAdmin)
