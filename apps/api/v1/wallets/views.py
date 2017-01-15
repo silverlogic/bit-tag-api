@@ -42,10 +42,10 @@ class NotificationsViewSet(mixins.CreateModelMixin,
         print(data)
         if data['type'] == 'wallet:addresses:new-payment':
             try:
-                address = Address.objects.get(coinbase_id=data['data']['id'])
+                address = Address.objects.get(coinbase_id=data['data']['resource']['id'])
                 Transaction.objects.get_or_create(
                     address=address,
-                    amount=data['additional_data']['amount']['amount']
+                    amount=data['data']['amount']['amount']
                 )
                 APNSDevice.objects.filter(user=address.user).send_message({'type': 'load_received'})
             except Address.DoesNotExist:
